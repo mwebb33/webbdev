@@ -1,6 +1,8 @@
-# Welcome to Remix!
+## Docs
 
-- [Remix Docs](https://remix.run/docs)
+https://developers.cloudflare.com/pages/platform/functions/
+https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-cloudflare-workers
+
 
 ## Development
 
