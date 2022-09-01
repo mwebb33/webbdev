@@ -18,7 +18,7 @@ export default function Index() {
             href="https://remix.run/tutorials/jokes"
             rel="noreferrer"
           >
-            Deep Dive Jokes App Tutorial
+            Edited
           </a>
         </li>
         <li>
