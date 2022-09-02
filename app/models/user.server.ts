@@ -10,6 +10,7 @@ export async function getUserById(id: User["id"]) {
 }
 
 export async function getUserByEmail(email: User["email"]) {
+  console.log('here', prisma)
   return prisma.user.findUnique({ where: { email } });
 }
 

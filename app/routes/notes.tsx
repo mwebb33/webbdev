@@ -1,5 +1,5 @@
 import type { LoaderArgs } from "@remix-run/cloudflare";
-// import { json } from "@remix-run/node";
+import { json } from "@remix-run/cloudflare";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 
 import { getNoteListItems } from "~/models/note.server";

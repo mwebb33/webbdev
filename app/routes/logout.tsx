@@ -1,5 +1,5 @@
 import type { ActionArgs } from "@remix-run/cloudflare";
-// import { redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/cloudflare";
 
 import { logout } from "~/session.server";
 
