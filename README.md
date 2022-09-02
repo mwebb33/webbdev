@@ -1,6 +1,9 @@
 ## Docs
 
+Based on: https://github.com/remix-run/remix/tree/main/templates/cloudflare-pages
+
 https://developers.cloudflare.com/pages/platform/functions/
+
 https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-cloudflare-workers
 
 
