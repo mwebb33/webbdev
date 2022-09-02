@@ -16,6 +16,14 @@ You will be utilizing Wrangler for local development to emulate the Cloudflare r
 npm run dev
 ```
 
+```sh
+npx remix init
+npm run docker # needs to be mongodb
+npm run setup
+npm run build
+npm run dev
+```
+
 Open up [http://127.0.0.1:8788](http://127.0.0.1:8788) and you should be ready to go!
 
 ## Deployment

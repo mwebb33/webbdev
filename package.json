@@ -1,4 +1,5 @@
 {
+  "name": "webbdev",
   "private": true,
   "sideEffects": false,
   "scripts": {
@@ -6,22 +7,44 @@
     "dev": "remix build && run-p \"dev:*\"",
     "dev:remix": "remix watch",
     "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
-    "start": "cross-env NODE_ENV=production npm run dev:wrangler"
+    "start": "cross-env NODE_ENV=production npm run dev:wrangler",
+    "docker": "docker-compose up -d",
+    "format": "prettier --write .",
+    "generate:css": "tailwindcss -o ./app/styles/tailwind.css",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "setup": "prisma generate --data-proxy",
+    "prisma:deploy": " prisma migrate deploy && prisma db seed",
+    "test": "vitest",
+    "test:e2e:dev": "start-server-and-test dev http://localhost:3000 \"npx cypress open\"",
+    "pretest:e2e:run": "npm run build",
+    "typecheck": "tsc -b && tsc -b cypress",
+    "validate": "run-p \"test -- --run\" lint typecheck test:e2e:run"
   },
   "dependencies": {
+    "@prisma/client": "^4.3.1",
     "@remix-run/cloudflare": "^1.7.0",
     "@remix-run/cloudflare-pages": "^1.7.0",
     "@remix-run/react": "^1.7.0",
+    "@vitejs/plugin-react": "^2.0.1",
+    "bcryptjs": "^2.4.3",
     "cross-env": "^7.0.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "cypress": "^10.6.0",
+    "isbot": "^3.5.2",
+    "prisma": "^4.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tiny-invariant": "^1.2.0",
+    "ts-node": "^10.9.1",
+    "vite-tsconfig-paths": "^3.5.0",
+    "vitest": "^0.22.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.14.1",
     "@remix-run/dev": "^1.7.0",
     "@remix-run/eslint-config": "^1.7.0",
-    "@types/react": "^17.0.47",
-    "@types/react-dom": "^17.0.17",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
     "eslint": "^8.20.0",
     "npm-run-all": "^4.1.5",
     "typescript": "^4.7.4",
@@ -29,5 +52,15 @@
   },
   "engines": {
     "node": ">=16.13"
-  }
+  },
+  "prisma": {
+    "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
+  },
+  "prettier": {},
+  "eslintIgnore": [
+    "/node_modules",
+    "/build",
+    "/public/build",
+    "/postgres-data"
+  ]
 }
