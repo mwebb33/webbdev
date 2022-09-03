@@ -1,0 +1,12 @@
+diff --git a/node_modules/@prisma/client/generator-build/index.js b/node_modules/@prisma/client/generator-build/index.js
+index f6ec030..bf2acfe 100644
+--- a/node_modules/@prisma/client/generator-build/index.js
++++ b/node_modules/@prisma/client/generator-build/index.js
+@@ -24356,7 +24356,6 @@ config.document = dmmf
+ config.dirname = dirname
+ ${await buildInlineSchema(dataProxy2, schemaPath2)}
+ ${buildInlineDatasource(dataProxy2, datasources2)}
+-${buildInjectableEdgeEnv(edge, datasources2)}
+ ${buildWarnEnvConflicts(edge, runtimeDir, runtimeName)}
+ ${buildDebugInitialization(edge)}
+ const PrismaClient = getPrismaClient(config)
