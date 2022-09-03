@@ -12,32 +12,32 @@ declare global {
 // create a new connection to the DB with every change either.
 // in production we'll have a single connection to the DB.
 if (false) {
-  prisma = getClient() as any;
+  prisma = getClient();
 } else {
   if (!global.__db__) {
-    global.__db__ = getClient() as any;
+    global.__db__ = getClient();
   }
   prisma = global.__db__
 }
 
 
-async function getClient() {
+function getClient() {
   invariant(typeof DATABASE_URL === "string", "DATABASE_URL env var not set");
 
   const databaseUrl = new URL(DATABASE_URL);
 
   const isLocalHost = databaseUrl.hostname === "localhost";
 
-  if (!isLocalHost) {
-    // FLY specific code to check for replica region
-    // databaseUrl.host = `${FLY_REGION}.${databaseUrl.host}`;
-    // if (!isReadReplicaRegion) {
-      // 5433 is the read-replica port
-      // databaseUrl.port = "5433";
-    // }
-  }
+  // if (!isLocalHost) {
+  //   // FLY specific code to check for replica region
+  //   // databaseUrl.host = `${FLY_REGION}.${databaseUrl.host}`;
+  //   // if (!isReadReplicaRegion) {
+  //     // 5433 is the read-replica port
+  //     // databaseUrl.port = "5433";
+  //   // }
+  // }
 
-  console.log(`🔌 setting up prisma client to ${databaseUrl.host}`);
+  console.log(`🔌 setting up prisma client to ${databaseUrl}`);
   // NOTE: during development if you change anything in this function, remember
   // that this only runs once per server restart and won't automatically be
   // re-run per request like everything else is. So if you need to change
