@@ -6,4 +6,3 @@ node_modules
 /public/build
 .env
 wrangler.toml
-/postgres-data
