@@ -6,8 +6,8 @@ import * as React from "react";
 import { createNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 
-export async function action({ request }: ActionArgs) {
-  const userId = await requireUserId(request);
+export async function action({ request, context }: ActionArgs) {
+  const userId = await requireUserId(request, context);
 
   const formData = await request.formData();
   const title = formData.get("title");
@@ -27,7 +27,7 @@ export async function action({ request }: ActionArgs) {
     );
   }
 
-  const note = await createNote({ title, body, userId });
+  const note = await createNote({ title, body, userId }, context);
 
   return redirect(`/notes/${note.id}`);
 }
