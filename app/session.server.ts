@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, redirect } from "@remix-run/cloudflare";
+import { AppLoadContext, createCookieSessionStorage, redirect } from "@remix-run/cloudflare";
 import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
@@ -32,11 +32,11 @@ export async function getUserId(
   return userId;
 }
 
-export async function getUser(request: Request) {
+export async function getUser(request: Request, context: AppLoadContext) {
   const userId = await getUserId(request);
   if (userId === undefined) return null;
 
-  const user = await getUserById(userId);
+  const user = await getUserById(userId, context);
   if (user) return user;
 
   throw await logout(request);
@@ -44,6 +44,7 @@ export async function getUser(request: Request) {
 
 export async function requireUserId(
   request: Request,
+  context: AppLoadContext,
   redirectTo: string = new URL(request.url).pathname
 ) {
   const userId = await getUserId(request);
@@ -54,10 +55,10 @@ export async function requireUserId(
   return userId;
 }
 
-export async function requireUser(request: Request) {
-  const userId = await requireUserId(request);
+export async function requireUser(request: Request, context: AppLoadContext) {
+  const userId = await requireUserId(request, context);
 
-  const user = await getUserById(userId);
+  const user = await getUserById(userId, context);
   if (user) return user;
 
   throw await logout(request);

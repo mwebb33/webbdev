@@ -4,9 +4,9 @@
 // and that user will get deleted
 
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-// import { installGlobals } from "@remix-run/cloudflare";
+import { installGlobals } from "@remix-run/cloudflare";
 
-import { prisma } from "~/db.server";
+// import { prisma } from "~/db.server";
 
 // installGlobals();
 

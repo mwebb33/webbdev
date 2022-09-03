@@ -1,6 +1,7 @@
 import type { User, Note } from "@prisma/client";
+import { AppLoadContext } from "@remix-run/cloudflare";
 
-import { prisma } from "~/db.server";
+import { getClient } from "~/db.server";
 
 export type { Note } from "@prisma/client";
 
@@ -9,15 +10,18 @@ export function getNote({
   userId,
 }: Pick<Note, "id"> & {
   userId: User["id"];
-}) {
-  return prisma.note.findFirst({
+}, context: AppLoadContext) {
+  const { DATABASE_URL} = context;
+  return getClient(DATABASE_URL).note.findFirst({
     select: { id: true, body: true, title: true },
     where: { id, userId },
   });
 }
 
-export function getNoteListItems({ userId }: { userId: User["id"] }) {
-  return prisma.note.findMany({
+export function getNoteListItems({ userId }: { userId: User["id"] }, context: AppLoadContext) {
+  const { DATABASE_URL} = context;
+
+  return getClient(DATABASE_URL).note.findMany({
     where: { userId },
     select: { id: true, title: true },
     orderBy: { updatedAt: "desc" },
@@ -30,8 +34,9 @@ export function createNote({
   userId,
 }: Pick<Note, "body" | "title"> & {
   userId: User["id"];
-}) {
-  return prisma.note.create({
+}, context: AppLoadContext) {
+  const { DATABASE_URL} = context;
+  return getClient(DATABASE_URL).note.create({
     data: {
       title,
       body,
@@ -47,8 +52,9 @@ export function createNote({
 export function deleteNote({
   id,
   userId,
-}: Pick<Note, "id"> & { userId: User["id"] }) {
-  return prisma.note.deleteMany({
+}: Pick<Note, "id"> & { userId: User["id"] }, context: AppLoadContext) {
+  const { DATABASE_URL} = context;
+  return getClient(DATABASE_URL).note.deleteMany({
     where: { id, userId },
   });
 }

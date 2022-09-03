@@ -6,22 +6,22 @@ import invariant from "tiny-invariant";
 import { deleteNote, getNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 
-export async function loader({ request, params }: LoaderArgs) {
-  const userId = await requireUserId(request);
+export async function loader({ request, context, params }: LoaderArgs) {
+  const userId = await requireUserId(request, context);
   invariant(params.noteId, "noteId not found");
 
-  const note = await getNote({ userId, id: params.noteId });
+  const note = await getNote({ userId, id: params.noteId }, context);
   if (!note) {
     throw new Response("Not Found", { status: 404 });
   }
   return json({ note });
 }
 
-export async function action({ request, params }: ActionArgs) {
-  const userId = await requireUserId(request);
+export async function action({ request, context, params }: ActionArgs) {
+  const userId = await requireUserId(request, context);
   invariant(params.noteId, "noteId not found");
 
-  await deleteNote({ userId, id: params.noteId });
+  await deleteNote({ userId, id: params.noteId }, context);
 
   return redirect("/notes");
 }

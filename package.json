@@ -6,7 +6,7 @@
     "build": "remix build",
     "dev": "remix build && run-p \"dev:*\"",
     "dev:remix": "remix watch",
-    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public --binding DATABASE_URL=\"mongodb+srv://mongo:7NoG57HDPsOC@cluster0.erodyb9.mongodb.net/Log?retryWrites=true&w=majority\"",
+    "dev:wrangler": "cross-env NODE_ENV=development wrangler pages dev ./public",
     "start": "cross-env NODE_ENV=production npm run dev:wrangler",
     "docker": "docker-compose up -d",
     "format": "prettier --write .",

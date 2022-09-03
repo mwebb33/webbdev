@@ -1,22 +1,26 @@
 import type { Password, User } from "@prisma/client";
+import { AppLoadContext } from "@remix-run/cloudflare";
 import bcrypt from "bcryptjs";
 
-import { prisma } from "~/db.server";
+import { getClient } from "~/db.server";
 
 export type { User } from "@prisma/client";
 
-export async function getUserById(id: User["id"]) {
-  return prisma.user.findUnique({ where: { id } });
+export async function getUserById(id: User["id"], context: AppLoadContext) {
+  const { DATABASE_URL} = context;
+  return getClient(DATABASE_URL).user.findUnique({ where: { id } });
 }
 
-export async function getUserByEmail(email: User["email"]) {
-  return prisma.user.findUnique({ where: { email } });
+export async function getUserByEmail(email: User["email"], context: AppLoadContext) {
+  const { DATABASE_URL} = context;
+  return getClient(DATABASE_URL).user.findUnique({ where: { email } });
 }
 
-export async function createUser(email: User["email"], password: string) {
+export async function createUser(email: User["email"], password: string, context: AppLoadContext) {
   const hashedPassword = await bcrypt.hash(password, 10);
-
-  return prisma.user.create({
+  const { DATABASE_URL} = context;
+  
+  return getClient(DATABASE_URL).user.create({
     data: {
       email,
       password: {
@@ -28,15 +32,18 @@ export async function createUser(email: User["email"], password: string) {
   });
 }
 
-export async function deleteUserByEmail(email: User["email"]) {
-  return prisma.user.delete({ where: { email } });
+export async function deleteUserByEmail(email: User["email"], context: AppLoadContext) {
+  const { DATABASE_URL} = context;
+  return getClient(DATABASE_URL).user.delete({ where: { email } });
 }
 
 export async function verifyLogin(
   email: User["email"],
-  password: Password["hash"]
+  password: Password["hash"],
+  context: AppLoadContext
 ) {
-  const userWithPassword = await prisma.user.findUnique({
+  const { DATABASE_URL} = context;
+  const userWithPassword = await getClient(DATABASE_URL).user.findUnique({
     where: { email },
     include: {
       password: true,

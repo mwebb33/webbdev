@@ -1,41 +1,12 @@
 import { PrismaClient } from "@prisma/client/edge";
 import invariant from "tiny-invariant";
 
-let prisma: PrismaClient;
+function getClient(dbUrl: any) {
+  invariant(typeof dbUrl === "string", "DATABASE_URL env var not set");
 
-declare global {
-  var __db__: PrismaClient;
-}
-
-// this is needed because in development we don't want to restart
-// the server with every change, but we want to make sure we don't
-// create a new connection to the DB with every change either.
-// in production we'll have a single connection to the DB.
-if (false) {
-  prisma = getClient();
-} else {
-  if (!global.__db__) {
-    global.__db__ = getClient();
-  }
-  prisma = global.__db__
-}
-
-
-function getClient() {
-  invariant(typeof DATABASE_URL === "string", "DATABASE_URL env var not set");
-
-  const databaseUrl = new URL(DATABASE_URL);
+  const databaseUrl = new URL(dbUrl);
 
   const isLocalHost = databaseUrl.hostname === "localhost";
-
-  // if (!isLocalHost) {
-  //   // FLY specific code to check for replica region
-  //   // databaseUrl.host = `${FLY_REGION}.${databaseUrl.host}`;
-  //   // if (!isReadReplicaRegion) {
-  //     // 5433 is the read-replica port
-  //     // databaseUrl.port = "5433";
-  //   // }
-  // }
 
   console.log(`🔌 setting up prisma client to ${databaseUrl}`);
   // NOTE: during development if you change anything in this function, remember
@@ -55,4 +26,4 @@ function getClient() {
   return client;
 }
 
-export { prisma };
+export { getClient }
