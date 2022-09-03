@@ -11,13 +11,6 @@ https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-clou
 You will be utilizing Wrangler for local development to emulate the Cloudflare runtime. This is already wired up in your package.json as the `dev` script:
 
 ```sh
-# start the remix dev server and wrangler
-npm run dev
-```
-
-```sh
-npx remix init
-npm run setup
 npm run build
 npm run dev
 ```

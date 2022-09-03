@@ -7,7 +7,7 @@ import { deleteNote, getNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 
 export async function loader({ request, context, params }: LoaderArgs) {
-  const userId = await requireUserId(request, context);
+  const userId = await requireUserId(request);
   invariant(params.noteId, "noteId not found");
 
   const note = await getNote({ userId, id: params.noteId }, context);
@@ -18,7 +18,7 @@ export async function loader({ request, context, params }: LoaderArgs) {
 }
 
 export async function action({ request, context, params }: ActionArgs) {
-  const userId = await requireUserId(request, context);
+  const userId = await requireUserId(request);
   invariant(params.noteId, "noteId not found");
 
   await deleteNote({ userId, id: params.noteId }, context);

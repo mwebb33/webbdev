@@ -7,7 +7,7 @@ import { createNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 
 export async function action({ request, context }: ActionArgs) {
-  const userId = await requireUserId(request, context);
+  const userId = await requireUserId(request);
 
   const formData = await request.formData();
   const title = formData.get("title");

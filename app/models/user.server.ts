@@ -1,5 +1,5 @@
 import type { Password, User } from "@prisma/client";
-import { AppLoadContext } from "@remix-run/cloudflare";
+import type { AppLoadContext } from "@remix-run/cloudflare";
 import bcrypt from "bcryptjs";
 
 import { getClient } from "~/db.server";

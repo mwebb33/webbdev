@@ -5,6 +5,7 @@
 // as that new user.
 
 // import { installGlobals } from "@remix-run/cloudflare";
+import type { AppLoadContext } from "@remix-run/cloudflare";
 import { parse } from "cookie";
 
 import { createUser } from "~/models/user.server";

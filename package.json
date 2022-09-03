@@ -14,7 +14,7 @@
     "docker": "docker-compose up -d",
     "format": "prettier --write .",
     "generate:css": "tailwindcss -o ./app/styles/tailwind.css",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "eslint . --fix",
     "prisma:deploy": "prisma migrate deploy && prisma db seed",
     "prisma:migrate_dev": "prisma db push",
     "test": "vitest",
@@ -25,6 +25,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@prisma/client": "^4.3.1",
     "@remix-run/cloudflare": "^1.7.0",
     "@remix-run/cloudflare-pages": "^1.7.0",
@@ -33,6 +34,8 @@
     "bcryptjs": "^2.4.3",
     "cross-env": "^7.0.3",
     "cypress": "^10.6.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "isbot": "^3.5.2",
     "prisma": "^4.3.1",
     "react": "^18.2.0",

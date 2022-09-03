@@ -1,5 +1,5 @@
 import type { User, Note } from "@prisma/client";
-import { AppLoadContext } from "@remix-run/cloudflare";
+import type { AppLoadContext } from "@remix-run/cloudflare";
 
 import { getClient } from "~/db.server";
 
@@ -11,7 +11,7 @@ export function getNote({
 }: Pick<Note, "id"> & {
   userId: User["id"];
 }, context: AppLoadContext) {
-  const { DATABASE_URL} = context;
+  const { DATABASE_URL } = context;
   return getClient(DATABASE_URL).note.findFirst({
     select: { id: true, body: true, title: true },
     where: { id, userId },
@@ -19,7 +19,7 @@ export function getNote({
 }
 
 export function getNoteListItems({ userId }: { userId: User["id"] }, context: AppLoadContext) {
-  const { DATABASE_URL} = context;
+  const { DATABASE_URL } = context;
 
   return getClient(DATABASE_URL).note.findMany({
     where: { userId },
