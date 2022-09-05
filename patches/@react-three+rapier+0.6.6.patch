@@ -1,0 +1,13 @@
+diff --git a/node_modules/@react-three/rapier/dist/react-three-rapier.esm.js b/node_modules/@react-three/rapier/dist/react-three-rapier.esm.js
+index 66a3b66..6496dbd 100644
+--- a/node_modules/@react-three/rapier/dist/react-three-rapier.esm.js
++++ b/node_modules/@react-three/rapier/dist/react-three-rapier.esm.js
+@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo, createContext, useContext,
+ import { useAsset } from 'use-asset';
+ import { useFrame } from '@react-three/fiber';
+ import { Quaternion, Euler, Vector3, Object3D, Matrix4, InstancedMesh, CylinderBufferGeometry, BufferGeometry, BufferAttribute, SphereBufferGeometry, BoxBufferGeometry, DynamicDrawUsage } from 'three';
+-import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils';
++import { mergeVertices } from 'app/extern/BufferGeometryUtils.js';
+ 
+ const _quaternion = new Quaternion();
+ const _euler = new Euler();
