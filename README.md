@@ -1,10 +1,13 @@
-## Docs
+## Looking to make an interactive, serverless, blog site with Remix, free tier serverless hosting, relational Prisma DB connect!
 
-Based on: 
+## Based on these great projects / approaches!
+
 https://github.com/remix-run/remix/tree/main/templates/cloudflare-pages
 https://developers.cloudflare.com/pages/platform/functions/plugins/
-https://developers.cloudflare.com/pages/platform/functions/
 https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-cloudflare-workers
+
+https://github.com/timlrx/tailwind-nextjs-starter-blog
+https://docs.pmnd.rs/react-three-fiber/getting-started/examples
 
 ## Development
 
